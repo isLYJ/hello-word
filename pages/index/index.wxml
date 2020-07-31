@@ -1,0 +1,63 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+   <view class="separate"></view>
+
+  <view class="order" catchtap="toOrder">
+    <text class="myorder-text">我的余额：</text>
+    <text class="myorderlook-text">信用积分：0</text>
+  </view>
+  <view class="line">
+  </view>
+  <view class="navs">
+    <block wx:for-items="{{orderItems}}" wx:key="name">
+      <view class="nav-item" catchtap="toOrder" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+        <image src="{{item.imageurl}}" class="nav-image" />
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="separate"></view>
+  <view class="person-list">
+    <view class="list-item">
+      <navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">我的取件
+     
+      <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
+</navigator>
+    </view>
+    <view class="person-line"></view>
+    <view class="list-item">
+    <navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">我的寄件
+     
+       <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
+</navigator>
+    </view>
+    <view class="person-line"></view>
+    <view class="list-item">
+<navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">我的钱包
+     
+      <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
+</navigator>
+    </view>
+    <view class="person-line"></view>
+    <view class="list-item">
+<navigator class="item-text" url="/pages/Deposit/Deposit?title=navigate" hover-class="navigator-hover">我的暂存
+     
+      <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
+</navigator>
+    </view>
+  </view>
+  <view class="separate"></view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+<view>{{banner.errMsg}}</view>
+  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提交手机号</button>
+</view>
