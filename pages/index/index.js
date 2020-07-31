@@ -19,35 +19,54 @@ Page({
   },
   getPhoneNumber: function(e) {
     console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        if(res.code){
-          console.log(res.code)
-          console.log(res.code)
-          wx.request({
-            url:'http://localhost:8080/Test/tst',
-            data:{
-              code:res.code,
-              operFlag:'getOpenid'
-            },
-            method:'GET',
-            header:{
-              'content-type':'application/json'
-            },
-            success:function(res){
-              console.log(res.data);
+    console.log("iv:",e.detail.iv)
+    console.log("session_key:", wx.getStorageSync("session_key"))
+    console.log("session_key:", e.detail.session_key)
+    console.log("data:", e.detail.encryptedData)
+
+      　　wx.checkSession({
+        　　　　success: function (res) {
              
-            },
-            fail:function(res){
-              console.log("--------fail--------");
-            }
+          　　　　　　console.log("处于登录态");
+          
+        　　　　},
+        　　　　fail: function (res) {
+          　　　　　　console.log("需要重新登录");
+          　　　　　　wx.login({
+                  success: res => {
+                  console.log("session_key", res.code)
+                  }
           })
-        }
-        }
-        })
+        　　　　}
+      　　})
+    // wx.login({
+    //   success: res => {
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //     //console.log("session", res.checkSession)
+    //     if(res.code){
+    //       console.log("session_key",res.code)
+          
+    //       // wx.request({
+    //       //   url:'http://localhost:8080/Test/tst',
+    //       //   data:{
+    //       //     code:res.code,
+    //       //     operFlag:'getOpenid'
+    //       //   },
+    //       //   method:'GET',
+    //       //   header:{
+    //       //     'content-type':'application/json'
+    //       //   },
+    //       //   success:function(res){
+    //       //     console.log(res.data);
+             
+    //       //   },
+    //       //   fail:function(res){
+    //       //     console.log("--------fail--------");
+    //       //   }
+    //       // })
+    //     }
+    //     }
+    //     })
   },
   onLoad: function () {
     // wx.request({
@@ -147,59 +166,59 @@ onLoad: function() {
             //   this.userInfoReadyCallback(res)
             // }
             
-            wx.login({
-              // success: res => {
+            // wx.login({
+            //   // success: res => {
                 
-                success: function (res) {
-                var code1 = res.code
-               // var app = getApp()
-               // var th = this;
-              // var that=this;
-                var appid1 = "wx77829bf1956b3b04"
-                var secret1 = "aefc74b0fc8bd1f42600e1a603b04727"
-               // console.log('获取的code', code1, appid1, secret1)
-                var ul = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid1 + '&secret=' + secret1 + '&js_code=' + code1 + '&grant_type=authorization_code'
-                wx.request({
-                  url: ul,
-                  method: 'GET',
-                  success: function (e) {
-                    var openid = e.data.openid
-                    //console.log('获取登录身份的唯一openid', openid)
-                // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                if(res.code){
-                  // console.log(res.code)
-                  // console.log(res.code)
-                  // console.log("1111",o)
-                  wx.request({
-                    url:'http://localhost:8010/Ch10/buttonTest2.do',
-                    data:{
-                      // code:res.code,
-                      // operFlag:'getOpenid',
-                      openid:openid,
-                      userInfo:o
-                    },
-                    method:'GET',
-                    header:{
-                      'content-type':'application/json'
-                    },
-                    success:function(res){
-                      console.log(res)
-                      console.log(res.data.errMsg)
+            //     success: function (res) {
+            //     var code1 = res.code
+            //    // var app = getApp()
+            //    // var th = this;
+            //   // var that=this;
+            //     var appid1 = "wx77829bf1956b3b04"
+            //     var secret1 = "aefc74b0fc8bd1f42600e1a603b04727"
+            //    // console.log('获取的code', code1, appid1, secret1)
+            //     var ul = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid1 + '&secret=' + secret1 + '&js_code=' + code1 + '&grant_type=authorization_code'
+            //     wx.request({
+            //       url: ul,
+            //       method: 'GET',
+            //       success: function (e) {
+            //         var openid = e.data.openid
+            //         //console.log('获取登录身份的唯一openid', openid)
+            //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+            //     if(res.code){
+            //       // console.log(res.code)
+            //       // console.log(res.code)
+            //       // console.log("1111",o)
+            //       wx.request({
+            //         url:'http://localhost:8010/Ch10/buttonTest2.do',
+            //         data:{
+            //           // code:res.code,
+            //           // operFlag:'getOpenid',
+            //           openid:openid,
+            //           userInfo:o
+            //         },
+            //         method:'GET',
+            //         header:{
+            //           'content-type':'application/json'
+            //         },
+            //         success:function(res){
+            //           console.log(res)
+            //           console.log(res.data.errMsg)
                      
-                      that.setData({                  
-                        banner: res.data
-                      })              
+            //           that.setData({                  
+            //             banner: res.data
+            //           })              
                      
-                    },
-                    fail:function(res){
-                      console.log("--------fail---1-----");
-                    }
-                  })
-                }
-                }
-              })
-            }
-                 })
+            //         },
+            //         fail:function(res){
+            //           console.log("--------fail---1-----");
+            //         }
+            //       })
+            //     }
+            //     }
+            //   })
+            // }
+            //      })
           }
         })
       }

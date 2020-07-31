@@ -1,4 +1,21 @@
 <!--index.wxml-->
+<view wx:if="{{isHide}}">
+    <view wx:if="{{canIUse}}">
+        <view class='header'>
+            <image src='../../../we7/resource/images/login.png'></image>
+        </view>
+        <view class='content'>
+            <text>请依次允许获得你的公开信息及手机号码</text>
+        </view>
+        <view class="" >
+            <button class="{{flag?'show':'hide'}}" type="primary" open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="bindGetUserInfo">{{AuthorizedLogin}}</button>
+        <button class="{{flag?'hide':'show'}}" type="primary" lang="zh_CN" open-type='getPhoneNumber'  bindgetphonenumber="getPhoneNumber">{{UserPhone}}</button>
+        </view>
+    </view>
+    <view wx:else>请升级微信版本</view>
+</view> 
+
+
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -10,7 +27,7 @@
    <view class="separate"></view>
 
   <view class="order" catchtap="toOrder">
-    <text class="myorder-text">我的余额：</text>
+    <text class="myorder-text">我的报警：</text>
     <text class="myorderlook-text">信用积分：0</text>
   </view>
   <view class="line">
@@ -27,28 +44,28 @@
   <view class="separate"></view>
   <view class="person-list">
     <view class="list-item">
-      <navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">我的取件
+      <navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">个人信息
      
       <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
 </navigator>
     </view>
     <view class="person-line"></view>
     <view class="list-item">
-    <navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">我的寄件
+    <navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">预警信息
      
        <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
 </navigator>
     </view>
     <view class="person-line"></view>
     <view class="list-item">
-<navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">我的钱包
+<navigator class="item-text" url="/pages/storage/storage?title=navigate" hover-class="navigator-hover">实时动态
      
       <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
 </navigator>
     </view>
     <view class="person-line"></view>
     <view class="list-item">
-<navigator class="item-text" url="/pages/Deposit/Deposit?title=navigate" hover-class="navigator-hover">我的暂存
+<navigator class="item-text" url="/pages/Deposit/Deposit?title=navigate" hover-class="navigator-hover">。。。。
      
       <image class="item-image" src="/utils/images/icon-arrowdown.png"></image>
 </navigator>

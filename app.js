@@ -4,15 +4,15 @@ App({
     
   },
   onLaunch: function () {
-    var o="";
+    // var o="";
     // 展示本地存储能力
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
 
     // 登录
-    wx.login({
-      success: res => {
+    // wx.login({
+    //   success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         // if(res.code){
         //   console.log(res.code)
@@ -36,8 +36,8 @@ App({
         //     }
         //   })
         // }
-        }
-        })
+        // }
+        // })
         
     // 获取用户信息
     wx.getSetting({
@@ -50,17 +50,17 @@ App({
             success: res => {
               
               // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+              // this.globalData.userInfo = res.userInfo
             //  console.log(res.userInfo)
-             o=res.userInfo
+            //  o=res.userInfo
             //  console.log(res.code)
             //  console.log("1111",o)
              
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+              // if (this.userInfoReadyCallback) {
+              //   this.userInfoReadyCallback(res)
+              // }
               
               // wx.login({
               //   // success: res => {

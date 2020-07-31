@@ -7,7 +7,6 @@
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
-		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -21,11 +20,14 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"bundle": true,
+		"preloadBackgroundData": false,
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
-	"appid": "wx77829bf1956b3b04",
+	"libVersion": "2.10.2",
+	"appid": "wx1c3c3393183c9b40",
 	"projectname": "app",
 	"debugOptions": {
 		"hidedInDevtools": []
